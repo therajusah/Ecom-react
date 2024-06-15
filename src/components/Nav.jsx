@@ -1,4 +1,3 @@
-
 const Nav = () => {
   return (
     <nav className="w-[15%] h-full bg-zinc-100 flex flex-col items-center pt-5">
