@@ -12,7 +12,7 @@ const Home = () => {
       <Nav />
       <div className="w-[85%] p-10 pt-[5%] flex flex-wrap overflow-x-hidden overflow-y-auto">
         {products ? (
-          products.map((p) => (
+          products.map((p, i) => (
             <Link
               to={`/details/${p.id}`}
               key={p.id}
