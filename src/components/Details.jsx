@@ -39,7 +39,7 @@ const Details = () => {
           Edit
         </Link>
         <Link
-          to={`/delete/${id}`} 
+          to={`/delete/${id}`}
           className="px-5 py-2 text-blue-300 border border-red-200 rounded"
         >
           Delete
