@@ -13,7 +13,7 @@ const Edit = () => {
     price: "",
     category: "",
   });
-
+ 
   const ChangeHandler = (e) => {
     const { name, value } = e.target;
     setProduct((prevProduct) => ({
