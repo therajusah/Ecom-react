@@ -1,15 +1,13 @@
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
-import axios from "../utils/axiosInstance";
 import Loader from "./Loader";
 import { ProductContext } from "../utils/Context";
 
 const Details = () => {
+  const navigate = useNavigate();
   const [products, setproducts] = useContext(ProductContext);
   const [product, setproduct] = useState(null);
   const { id } = useParams();
-
-
 
   // const getSingleProduct = async () => {
   //   try {
@@ -21,11 +19,18 @@ const Details = () => {
   // };
 
   useEffect(() => {
-    if(!product){
+    if (!product) {
       setproduct(products.filter((p) => p.id == id)[0]);
     }
     // getSingleProduct();
   }, []);
+
+  const ProductDeleteHandler = (id) => {
+    const FilteredProducts = products.filter((p) => p.id !== id);
+    setproducts(FilteredProducts);
+    localStorage.setItem("products", JSON.stringify(FilteredProducts));
+    navigate("/");
+  };
 
   return product ? (
     <div className="w-[70%] justify-between items-center flex h-full m-auto p-[10%]">
@@ -40,17 +45,18 @@ const Details = () => {
         <h2 className="text-red-300">₹ {product.price}</h2>
         <p className="mb-[5%]">{product.description}</p>
         <Link
-          to={`/edit/${id}`}
+          to={`/edit/${product.id}`}
           className="px-5 py-2 mr-5 text-blue-300 border border-blue-200 rounded"
         >
           Edit
         </Link>
-        <Link
+        <button
+          onClick={() => ProductDeleteHandler(product.id)}
           to={`/delete/${id}`}
           className="px-5 py-2 text-blue-300 border border-red-200 rounded"
         >
           Delete
-        </Link>
+        </button>
       </div>
     </div>
   ) : (
